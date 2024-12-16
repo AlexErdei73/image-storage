@@ -1,7 +1,46 @@
 body {
     background: black;
+    font-family: "Roboto", sans-serif;
 }
 
 nav {
+    position: fixed;
+    left: 0;
+    top: 0;
     color: yellowgreen;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    border-bottom: 0.15em solid yellowgreen;
+    height: 4em;
+    width: 100%;
+}
+
+nav .logo {
+    flex: 1;
+    min-width: 12em;
+}
+
+.logo h1 {
+    margin: auto;
+    text-align: center;
+}
+
+nav ul {
+    flex: 2;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    list-style-type: none;
+    margin: 0 2em 0 0;
+    padding: 0;
+}
+
+nav li {
+    flex: 0 1 10em;
+}
+
+nav a {
+    color: inherit;
+    text-decoration: none;
 }

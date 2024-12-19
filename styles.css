@@ -1,5 +1,10 @@
+::selection {
+	background: cyan;
+	color: rgb(32, 32, 32);
+}
+
 body {
-	background: black;
+	background: rgb(32, 32, 32);
 	color: yellowgreen;
 	font-family: "Roboto", sans-serif;
 	margin: 0;
@@ -30,7 +35,7 @@ header {
 	left: 0;
 	top: 0;
 	width: 100%;
-	background: black;
+	background: rgb(32, 32, 32);
 	z-index: 10;
 }
 
@@ -78,12 +83,12 @@ nav a {
 }
 
 nav li a::after {
-	content:'';
-	position:absolute;
-	bottom:0;
-	left:0;
-	right:0;
-	height:0.0325em;
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 0.0325em;
 	background: yellowgreen;
 	transform-origin: left;
 	transform: scaleX(0);
@@ -103,7 +108,7 @@ nav li a:hover::after {
 form {
 	display: flex;
 	flex-direction: column;
-	flex-wrap:wrap;
+	flex-wrap: wrap;
 	gap: 1em;
 	align-items: start;
 	font-size: 120%;
@@ -129,7 +134,34 @@ form {
 	align-items: start;
 	justify-content: center;
 	max-height: calc(100vh - 5em);
-	overflow:hidden;
+	overflow: hidden;
+}
+
+button {
+	background: rgb(32, 32, 32);
+	color: yellowgreen;
+	border: 0.075em solid yellowgreen;
+	border-radius: 0.325em;
+	font-size: inherit;
+	padding: 0.5em;
+}
+
+button:hover {
+	color: cyan;
+	border-color: cyan;
+}
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+	outline: 0.2em double cyan;
+}
+
+input {
+	color: yellowgreen;
+	background: rgb(48, 48, 48);
+	border: 0.075em solid yellowgreen;
+	border-radius: 0.325em;
 }
 
 @media (max-width: 35em) {

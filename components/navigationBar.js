@@ -4,7 +4,7 @@ const titleNode = document.querySelector("title");
 const pageTitleLiveRegion = document.querySelector("#page-title-live-region");
 const mainNode = document.querySelector("main");
 //const dropdownButton = document.querySelector("#dropdown");
-const anchors = document.querySelectorAll("nav a");
+//const anchors = document.querySelectorAll("nav a");
 
 const components = ["home", "about", "register", "login"];
 const nodes = [];
@@ -21,7 +21,7 @@ function updateDOM(index) {
 	if (prevIndex >= 0) nodes[prevIndex].classList.add("hidden");
 	nodes[index].classList.remove("hidden");
 	prevIndex = index;
-	const title = `${components[index]} page - Shopping Cart Vanilla`;
+	const title = `${components[index]} page - Image Storage`;
 	titleNode.textContent = title;
 	pageTitleLiveRegion.textContent = title;
 

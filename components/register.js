@@ -1,8 +1,19 @@
 import { importTemp } from "../helper.js";
 import { register } from "../backend/backend.js";
 
+function removeError(node) {
+  const errorNode = node.querySelector(".error");
+  if (errorNode) node.removeChild(errorNode);
+}
+
+function showError(node, error) {
+  const errorNode = importTemp(5);
+  errorNode.textContent = error.message;
+  node.appendChild(errorNode);
+}
+
 function addSubmitListener(node) {
-    const listener = function (event) {
+    const listener = async function (event) {
         event.preventDefault();
         const username = node.querySelector("#username").value;
         const password = node.querySelector("#password").value;
@@ -14,7 +25,12 @@ function addSubmitListener(node) {
           email,
           name,
         };
-        register(user);
+        removeError(node);
+        const json = await register(user);
+        if (json.error) {
+          console.error(json.error);
+          showError(node, json.error);
+        } else console.log(json);
     };
     
     node.addEventListener("submit", listener);

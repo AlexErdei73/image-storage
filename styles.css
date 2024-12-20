@@ -164,6 +164,14 @@ input {
 	border-radius: 0.325em;
 }
 
+.error {
+	font-size: 100%;
+	color: red;
+	padding: 0.1em;
+	border: 0.075em solid red;
+	border-radius: 0.325em;
+}
+
 @media (max-width: 35em) {
 	nav .logo {
 		display: none;

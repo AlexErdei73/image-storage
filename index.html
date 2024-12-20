@@ -45,7 +45,7 @@
 		<main></main>
 	</body>
 
-	<!-- Home 1 -->
+	<!-- Home 0 -->
 	<template>
 		<div class="home">
 			<article>
@@ -54,7 +54,7 @@
 		</div>
 	</template>
 
-	<!-- About 2 -->
+	<!-- About 1 -->
 	<template>
 		<div class="about">
 			<article>
@@ -63,40 +63,45 @@
 		</div>
 	</template>
 
-	<!-- Register 3 -->
+	<!-- Register 2 -->
 	<template>
 		<div class="register">
 			<article>
-				<form action="">
-					<h1>Register</h1>
-					<div class="form-group">
-						<label for="username">Username*</label>
-						<input type="text" id="username" required>
-					</div>
-					<div class="form-group">
-						<label for="password">Password*</label>
-						<input type="password" id="password" required>
-					</div>
-					<div class="form-group">
-						<label for="email">Email*</label>
-						<input type="email" id="email" required>
-					</div>
-					<div class="form-group">
-						<label for="name">Name</label>
-						<input type="text" id="name">
-					</div>
-					<button type="submit">Submit</button>
-				</form>
+				
 			</article>
 		</div>
 	</template>
 
-	<!-- Login 4 -->
+	<!-- Login 3 -->
 	<template>
 		<div class="login">
 			<article>
 				<h1>Login</h1>
 			</article>
 		</div>
+	</template>
+
+	<!-- Registration Form 4 -->
+	<template>
+		<form action="">
+			<h1>Register</h1>
+			<div class="form-group">
+				<label for="username">Username*</label>
+				<input type="text" id="username" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password*</label>
+				<input type="password" id="password" minlength="12" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email*</label>
+				<input type="email" id="email" required>
+			</div>
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input type="text" id="name">
+			</div>
+			<button type="submit">Submit</button>
+		</form>
 	</template>
 </html>

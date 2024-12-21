@@ -1,12 +1,12 @@
 import { importTemp } from "../helper.js";
 import { register } from "../backend/backend.js";
 
-function removeError(node) {
+export function removeError(node) {
   const errorNode = node.querySelector(".error");
   if (errorNode) node.removeChild(errorNode);
 }
 
-function showError(node, error) {
+export function showError(node, error) {
   const errorNode = importTemp(5);
   errorNode.textContent = error.message;
   node.appendChild(errorNode);

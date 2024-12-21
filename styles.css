@@ -36,7 +36,7 @@ header {
 	top: 0;
 	width: 100%;
 	background: rgb(32, 32, 32);
-	z-index: 10;
+	z-index: 1;
 }
 
 nav {
@@ -129,7 +129,8 @@ form {
 	min-width: 7em;
 }
 
-.register article {
+.register article,
+.login article {
 	display: flex;
 	align-items: start;
 	justify-content: center;
@@ -165,9 +166,10 @@ input {
 }
 
 .error {
-	font-size: 100%;
+	font-size: 83.33%;
 	color: red;
-	padding: 0.1em;
+	margin: 0;
+	padding: 0.5em;
 	border: 0.075em solid red;
 	border-radius: 0.325em;
 }

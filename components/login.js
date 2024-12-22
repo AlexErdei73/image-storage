@@ -1,6 +1,10 @@
 import { importTemp } from "../helper.js";
 import { login } from "../backend/backend.js";
-import { removeError, showError } from "./register.js";
+import {
+	removeError,
+	showError,
+	addShowHidePasswordListener,
+} from "./register.js";
 import { setUser } from "../index.js";
 import { initHome } from "./home.js";
 
@@ -41,6 +45,7 @@ export function initLogin() {
 	const oldNode = loginNode.childNodes[0];
 	const node = importTemp(6);
 	addSubmitListener(node);
+	addShowHidePasswordListener(node);
 	if (!oldNode) loginNode.appendChild(node);
 	else loginNode.replaceChild(node, oldNode);
 }

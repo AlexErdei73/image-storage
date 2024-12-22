@@ -164,6 +164,7 @@ input {
 	background: rgb(48, 48, 48);
 	border: 0.075em solid yellowgreen;
 	border-radius: 0.325em;
+	width: 15em;
 }
 
 .error {
@@ -173,6 +174,22 @@ input {
 	padding: 0.5em;
 	border: 0.075em solid red;
 	border-radius: 0.325em;
+}
+
+#password-container {
+	position: relative;
+	font-size: inherit;
+}
+
+#password {
+	font-size: 69.8%;
+	padding: 0.2em 0.1em;
+}
+
+#password-button {
+	position: absolute;
+	top: 0.2em;
+	right: 0.2em;
 }
 
 @media (max-width: 35em) {

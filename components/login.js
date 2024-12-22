@@ -1,6 +1,13 @@
 import { importTemp } from "../helper.js";
 import { login } from "../backend/backend.js";
 import { removeError, showError } from "./register.js";
+import { setUser } from "../index.js";
+import { initHome } from "./home.js";
+
+const userLoggedIn = {
+	username: "",
+	token: "",
+};
 
 function addSubmitListener(node) {
 	const listener = async function (event) {
@@ -16,7 +23,13 @@ function addSubmitListener(node) {
 		if (json.error) {
 			console.error(json.error);
 			showError(node, json.error);
-		} else console.log(json);
+		} else {
+			userLoggedIn.username = user.username;
+			userLoggedIn.token = `Bearer ${json.token}`;
+			localStorage.setItem(user, JSON.stringify(userLoggedIn));
+			setUser(userLoggedIn);
+			initHome();
+		}
 	};
 
 	node.addEventListener("submit", listener);

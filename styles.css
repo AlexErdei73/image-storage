@@ -130,7 +130,8 @@ form {
 }
 
 .register article,
-.login article {
+.login article,
+.home article {
 	display: flex;
 	align-items: start;
 	justify-content: center;

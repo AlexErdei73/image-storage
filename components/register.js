@@ -30,7 +30,9 @@ function addSubmitListener(node) {
 		if (json.error) {
 			console.error(json.error);
 			showError(node, json.error);
-		} else console.log(json);
+		} else {
+			window.location.href = "#login";
+		}
 	};
 
 	node.addEventListener("submit", listener);

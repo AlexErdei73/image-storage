@@ -26,9 +26,10 @@ function addSubmitListener(node) {
 		} else {
 			userLoggedIn.username = user.username;
 			userLoggedIn.token = `Bearer ${json.token}`;
-			localStorage.setItem(user, JSON.stringify(userLoggedIn));
+			localStorage.setItem("user", JSON.stringify(userLoggedIn));
 			setUser(userLoggedIn);
 			initHome();
+			window.location.href = "#home";
 		}
 	};
 

@@ -41,3 +41,21 @@ export async function login(user) {
 		return { error };
 	}
 }
+
+export async function upload(file, token) {
+	const formData = new FormData();
+	formData.append("file", file);
+	try {
+		const response = await fetch(`${BASE_URL}image`, {
+			method: "POST",
+			mode: "cors",
+			headers: {
+				Authorization: token,
+			},
+			body: formData,
+		});
+		return await getJSON(response);
+	} catch (error) {
+		return { error };
+	}
+}

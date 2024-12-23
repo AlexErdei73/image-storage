@@ -28,6 +28,7 @@ main {
 	width: 0;
 	height: 0;
 	overflow: hidden;
+	border: none;
 }
 
 header {
@@ -190,6 +191,39 @@ input {
 	position: absolute;
 	top: 0.2em;
 	right: 0.2em;
+}
+
+label[for="file"] {
+	position: relative;
+	width: 15em;
+	height: 1.3em;
+}
+
+label[for="file"] div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 0.065em 0.135em;
+	font-size: 83.33%;
+	background-color: rgb(32, 32, 32);
+	color: inherit;
+	z-index: 1;
+	border: 0.075em solid yellowgreen;
+	border-color: inherit;
+	border-radius: 0.325em;
+}
+
+input#file {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 0;
+	color: inherit;
+	border-color: inherit;
+}
+
+label[for="file"]:hover {
+	color: cyan;
 }
 
 @media (max-width: 35em) {

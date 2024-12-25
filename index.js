@@ -22,7 +22,6 @@ export function setUser(user) {
 
 export async function fetchStorage() {
 	const storage = await getStorage(getUser().token);
-	console.log(storage);
 	storage.forEach((folder) => {
 		const folders = folder[0].split("/");
 		const folderName = folders[folders.length - 2];
@@ -33,15 +32,13 @@ export async function fetchStorage() {
 			const fileName = path[path.length - 1];
 			appData[folderName].push(fileName);
 		});
-		console.log(`${folderName}: `, appData[folderName]);
 	});
-	console.log(appData.storage);
 }
 
 const userLoggedIn = JSON.parse(localStorage.getItem("user"));
 if (userLoggedIn) {
 	setUser(userLoggedIn);
-	fetchStorage();
+	await fetchStorage();
 }
 
 initRegister();

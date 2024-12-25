@@ -1,6 +1,6 @@
 import { upload } from "../backend/backend.js";
 import { importTemp } from "../helper.js";
-import { getUser } from "../index.js";
+import { getUser, appData } from "../index.js";
 import { showError, removeError } from "./register.js";
 
 let userLoggedIn;
@@ -23,9 +23,21 @@ async function submit(event) {
 	}
 }
 
+function getFoldersNode() {
+	const node = importTemp(8);
+	appData.storage.forEach((folder) => {
+		const item = importTemp(9);
+		item.setAttribute("data-folder", folder);
+		const span = item.querySelector("span");
+		span.textContent = folder;
+		node.appendChild(item);
+	});
+	return node;
+}
+
 export function initHome() {
 	const homeNode = document.querySelector(".home article");
-	const oldNode = homeNode.childNodes[0];
+	const oldFormNode = homeNode.childNodes[0];
 	const node = importTemp(7);
 	const pNode = node.querySelector("p");
 	let text = WELCOME_TEXT_NO_USER;
@@ -33,6 +45,10 @@ export function initHome() {
 	if (userLoggedIn.token !== "") text = `Welcome ${userLoggedIn.username}!`;
 	pNode.textContent = text;
 	node.addEventListener("submit", submit);
-	if (!oldNode) homeNode.appendChild(node);
-	else homeNode.replaceChild(node, oldNode);
+	if (!oldFormNode) homeNode.appendChild(node);
+	else homeNode.replaceChild(node, oldFormNode);
+	const oldFoldersNode = homeNode.childNodes[1];
+	const folders = getFoldersNode();
+	if (!oldFoldersNode) homeNode.appendChild(folders);
+	else homeNode.replaceChild(folders, oldFoldersNode);
 }

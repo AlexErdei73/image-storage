@@ -226,6 +226,24 @@ label[for="file"]:hover {
 	color: cyan;
 }
 
+.home ul {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+}
+
+.home p {
+	margin: 0;
+	padding: 0;
+}
+
+li button {
+	border: none;
+	padding: 0.2em;
+	display: flex;
+	align-items: center;
+}
+
 @media (max-width: 35em) {
 	nav .logo {
 		display: none;

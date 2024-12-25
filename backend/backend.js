@@ -59,3 +59,18 @@ export async function upload(file, token) {
 		return { error };
 	}
 }
+
+export async function getStorage(token) {
+	try {
+		const response = await fetch(`${BASE_URL}storage`, {
+			method: "GET",
+			mode: "cors",
+			headers: {
+				Authorization: token,
+			},
+		});
+		return await getJSON(response);
+	} catch (error) {
+		return { error };
+	}
+}

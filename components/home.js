@@ -23,11 +23,26 @@ async function submit(event) {
 	}
 }
 
+function onClickFolder(event) {
+	const folderBtn = event.currentTarget;
+	const isOpen = folderBtn.getAttribute("data-open") === "true" ? true : false;
+	const icon = folderBtn.querySelector("ion-icon");
+	if (isOpen) {
+		folderBtn.setAttribute("data-open", "false");
+		icon.setAttribute("name", "folder-outline");
+	} else {
+		folderBtn.setAttribute("data-open", "true");
+		icon.setAttribute("name", "folder-open-outline");
+	}
+}
+
 function getFoldersNode() {
 	const node = importTemp(8);
 	appData.storage.forEach((folder) => {
 		const item = importTemp(9);
-		item.setAttribute("data-folder", folder);
+		const button = item.querySelector("ion-button");
+		button.setAttribute("data-folder", folder);
+		button.addEventListener("click", onClickFolder);
 		const span = item.querySelector("span");
 		span.textContent = folder;
 		node.appendChild(item);

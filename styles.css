@@ -237,11 +237,15 @@ label[for="file"]:hover {
 	padding: 0;
 }
 
-li button {
-	border: none;
+li ion-button {
 	padding: 0.2em;
 	display: flex;
 	align-items: center;
+}
+
+li ion-button:hover {
+	color: cyan;
+	cursor: pointer;
 }
 
 @media (max-width: 35em) {

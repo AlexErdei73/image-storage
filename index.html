@@ -164,12 +164,18 @@
 
 	<!-- Home Folder List 8 -->
 	<template>
-		<ul class="folders"></ul>
+		<ul class="folders">
+			<li>
+				<figure>
+					<img src="" alt=""/>
+					<figcaption>Preview</figcaption>
+				</figure>
+			</li>
 	</template>
 
 	<!-- Home Folder List Item 9 -->
 	<template>
-		<li>
+		<li data-folder="">
 			<ion-button type="button" data-folder="" data-open="false">
 				<ion-icon name="folder-outline"></ion-icon>
 				<span></span>
@@ -185,13 +191,15 @@
 	<!-- Home File List Item 11 -->
 	<template>
 		<li data-file="">
-			<span></span>
-			<ionic-button>
-				<ionic-icon name="download outline"></ionic-icon>
-			</ionic-button>
-			<ionic-button>
-				<ionic-icon name="trash-outline"></ionic-icon>
-			</ionic-button>
+			<button type="button" data-file="" data-folder="">
+				<span></span>
+			</button>
+			<ion-button data-file="" data-folder="">
+				<ion-icon name="download-outline"></ion-icon>
+			</ion-button>
+			<ion-button data-file="" data-folder="">
+				<ion-icon name="trash-outline"></ion-icon>
+			</ion-button>
 		</li>
 	</template>
 </html>

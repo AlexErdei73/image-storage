@@ -237,15 +237,42 @@ label[for="file"]:hover {
 	padding: 0;
 }
 
-li ion-button {
+.folders li ion-button {
 	padding: 0.2em;
 	display: flex;
 	align-items: center;
 }
 
-li ion-button:hover {
+.folders li ion-button:hover {
 	color: cyan;
 	cursor: pointer;
+}
+
+li[data-file] {
+	display: flex;
+	align-items: center;
+}
+
+li[data-file] button {
+	border: none;
+	padding: 0;
+}
+
+li[data-file] span {
+	margin-right: 0.5em;
+}
+
+.home article {
+	justify-content: start;
+}
+
+figure {
+	margin: 0 0 0.5em;
+}
+
+figure img {
+	width: auto;
+	height: 5em;
 }
 
 @media (max-width: 35em) {

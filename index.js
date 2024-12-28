@@ -22,6 +22,10 @@ export function setUser(user) {
 
 export async function fetchStorage() {
 	const storage = await getStorage(getUser().token);
+	if (storage.error) {
+		console.error(storage.error.message);
+		return;
+	}
 	storage.forEach((folder) => {
 		const folders = folder[0].split("/");
 		const folderName = folders[folders.length - 2];

@@ -24,6 +24,7 @@ export async function fetchStorage() {
 	const storage = await getStorage(getUser().token);
 	if (storage.error) {
 		console.error(storage.error.message);
+		appData.storage.error = storage.error;
 		return;
 	}
 	storage.forEach((folder) => {
@@ -37,6 +38,13 @@ export async function fetchStorage() {
 			appData[folderName].push(fileName);
 		});
 	});
+}
+
+export function removeStorage() {
+	appData.storage.forEach((folder) => {
+		delete appData[folder];
+	});
+	appData.storage = [];
 }
 
 const userLoggedIn = JSON.parse(localStorage.getItem("user"));

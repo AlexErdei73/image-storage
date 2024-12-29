@@ -234,7 +234,6 @@ label[for="file"]:hover {
 
 .home p {
 	margin: 0;
-	padding: 0;
 }
 
 .folders li ion-button {
@@ -264,6 +263,10 @@ li[data-file] span {
 
 .home article {
 	justify-content: start;
+}
+
+.home article.center {
+	justify-content: center;
 }
 
 figure {

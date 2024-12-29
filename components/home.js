@@ -83,6 +83,10 @@ function getFoldersNode() {
 		span.textContent = folder;
 		node.appendChild(item);
 	});
+	if (appData.storage.error) {
+		removeError(node);
+		showError(node, appData.storage.error);
+	}
 	return node;
 }
 
@@ -93,13 +97,19 @@ export function initHome() {
 	const pNode = node.querySelector("p");
 	let text = WELCOME_TEXT_NO_USER;
 	userLoggedIn = getUser();
-	if (userLoggedIn.token !== "") text = `Welcome ${userLoggedIn.username}!`;
+	if (userLoggedIn && userLoggedIn.token !== "") {
+		text = `Welcome ${userLoggedIn.username}!`;
+		const homeArticle = document.querySelector(".home article");
+		homeArticle.classList.remove("center");
+	}
 	pNode.textContent = text;
 	node.addEventListener("submit", submit);
 	if (!oldFormNode) homeNode.appendChild(node);
 	else homeNode.replaceChild(node, oldFormNode);
-	const oldFoldersNode = homeNode.childNodes[1];
-	const folders = getFoldersNode();
-	if (!oldFoldersNode) homeNode.appendChild(folders);
-	else homeNode.replaceChild(folders, oldFoldersNode);
+	if (userLoggedIn && userLoggedIn.token !== "") {
+		const oldFoldersNode = homeNode.childNodes[1];
+		const folders = getFoldersNode();
+		if (!oldFoldersNode) homeNode.appendChild(folders);
+		else homeNode.replaceChild(folders, oldFoldersNode);
+	}
 }

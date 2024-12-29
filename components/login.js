@@ -5,7 +5,7 @@ import {
 	showError,
 	addShowHidePasswordListener,
 } from "./register.js";
-import { setUser } from "../index.js";
+import { setUser, fetchStorage, removeStorage } from "../index.js";
 import { initHome } from "./home.js";
 
 const userLoggedIn = {
@@ -32,6 +32,8 @@ function addSubmitListener(node) {
 			userLoggedIn.token = `Bearer ${json.token}`;
 			localStorage.setItem("user", JSON.stringify(userLoggedIn));
 			setUser(userLoggedIn);
+			removeStorage();
+			await fetchStorage();
 			initHome();
 			window.location.href = "#home";
 		}

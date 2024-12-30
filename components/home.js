@@ -34,6 +34,19 @@ function showPreview(event) {
 	);
 }
 
+function showImageInModal(event) {
+	const button = event.currentTarget;
+	const folder = button.getAttribute("data-folder");
+	const filename = button.getAttribute("data-file");
+	const dialog = document.querySelector("dialog");
+	const img = document.querySelector("dialog img");
+	img.setAttribute(
+		"src",
+		`https://alexerdei-team.us.ainiro.io/magic/modules/image-storage/image?folder=${folder}&filename=${filename}`
+	);
+	dialog.showModal();
+}
+
 function getFileListNode(folder) {
 	const fileList = appData[folder];
 	const node = importTemp(10);
@@ -47,6 +60,12 @@ function getFileListNode(folder) {
 		button.setAttribute("data-folder", folder);
 		button.setAttribute("data-file", file);
 		button.addEventListener("mouseover", showPreview);
+		button.addEventListener("click", showImageInModal);
+		const closeDlgBtn = document.querySelector("dialog ion-button");
+		closeDlgBtn.addEventListener("click", () => {
+			const dialog = document.querySelector("dialog");
+			dialog.close();
+		});
 		// end of listeners
 		node.appendChild(item);
 	});

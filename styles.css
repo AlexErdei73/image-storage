@@ -278,6 +278,26 @@ figure img {
 	height: 5em;
 }
 
+dialog {
+	color: yellowgreen;
+	background-color: rgb(48, 48, 48);
+}
+
+dialog ion-button {
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+dialog img {
+	height: 80vh;
+	width: auto;
+}
+
+dialog::backdrop {
+	background: rgba(0, 0, 0, 0.7);
+}
+
 @media (max-width: 35em) {
 	nav .logo {
 		display: none;

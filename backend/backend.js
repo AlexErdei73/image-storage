@@ -7,6 +7,14 @@ async function getJSON(response) {
 	return json;
 }
 
+async function getBlob(response) {
+	if (response.status > 299) {
+		const json = await response.json();
+		throw Error(json.message);
+	}
+	return await response.blob();
+}
+
 export async function register(user) {
 	try {
 		const response = await fetch(`${BASE_URL}register`, {
@@ -71,6 +79,21 @@ export async function getStorage(token) {
 		});
 		return await getJSON(response);
 	} catch (error) {
+		return { error };
+	}
+}
+
+export async function downloadFile(folder, filename, token) {
+	try {
+		const response = await fetch(`${BASE_URL}image?folder=${folder}&filename=${filename}`, {
+			method: "GET",
+			mode: "cors",
+			headers: {
+				Authorization: token,
+			},
+		});
+		return await getBlob(response);
+	} catch(error) {
 		return { error };
 	}
 }

@@ -1,4 +1,4 @@
-import { upload } from "../backend/backend.js";
+import { downloadFile, upload } from "../backend/backend.js";
 import { importTemp } from "../helper.js";
 import { getUser, appData } from "../index.js";
 import { showError, removeError } from "./register.js";
@@ -47,6 +47,32 @@ function showImageInModal(event) {
 	dialog.showModal();
 }
 
+async function downloadImage(event) {
+	const button = event.currentTarget;
+	const folder = button.getAttribute("data-folder");
+	const filename = button.getAttribute("data-file");
+	const blob = await downloadFile(folder, filename, getUser().token);
+	if (blob.error) {
+		const node = document.querySelector("ul.folders");
+		removeError(node);
+		showError(node, blob.error);
+	} else {
+		const url = URL.createObjectURL(blob);
+		const a = document.createElement("a");
+		a.href = url;
+		a.download = filename;
+		const clickHandler = () => {
+			setTimeout(() => {
+			  URL.revokeObjectURL(url);
+			  removeEventListener('click', clickHandler);
+			}, 150);
+		};
+		a.addEventListener("click", clickHandler, false);
+		a.click();
+		return a;
+	}
+}
+
 function getFileListNode(folder) {
 	const fileList = appData[folder];
 	const node = importTemp(10);
@@ -66,6 +92,10 @@ function getFileListNode(folder) {
 			const dialog = document.querySelector("dialog");
 			dialog.close();
 		});
+		const downloadBtn = item.querySelector("ion-button.download");
+		downloadBtn.setAttribute("data-folder", folder);
+		downloadBtn.setAttribute("data-file", file);
+		downloadBtn.addEventListener("click", downloadImage);
 		// end of listeners
 		node.appendChild(item);
 	});

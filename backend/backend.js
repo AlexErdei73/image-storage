@@ -97,3 +97,18 @@ export async function downloadFile(folder, filename, token) {
 		return { error };
 	}
 }
+
+export async function deleteFile(folder, filename, token) {
+	try {
+		const response = await fetch(`${BASE_URL}image?folder=${folder}&filename=${filename}`, {
+			method: "DELETE",
+			mode: "cors",
+			headers: {
+				Authorization: token,
+			}
+		});
+		return await getJSON(response);
+	} catch(error) {
+		return { error };
+	}
+}

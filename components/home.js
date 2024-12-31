@@ -1,4 +1,4 @@
-import { downloadFile, upload } from "../backend/backend.js";
+import { deleteFile, downloadFile, upload } from "../backend/backend.js";
 import { importTemp } from "../helper.js";
 import { getUser, appData } from "../index.js";
 import { showError, removeError } from "./register.js";
@@ -73,6 +73,23 @@ async function downloadImage(event) {
 	}
 }
 
+async function removeFile(event) {
+	const button = event.currentTarget;
+	const folder = button.getAttribute("data-folder");
+	const filename = button.getAttribute("data-file");
+	const json = await deleteFile(folder, filename, getUser().token);
+	const folders = document.querySelector("ul.folders")
+	removeError(folders);
+	if (json.error) {
+		console.error(json.error);
+		showError(folders, json.error);
+	} else {
+		const folderNode = folders.querySelector(`li[data-folder="${folder}"]`);
+		const fileNode = folderNode.querySelector(`li[data-file="${filename}"]`);
+		fileNode.remove();
+	}
+}
+
 function getFileListNode(folder) {
 	const fileList = appData[folder];
 	const node = importTemp(10);
@@ -96,6 +113,15 @@ function getFileListNode(folder) {
 		downloadBtn.setAttribute("data-folder", folder);
 		downloadBtn.setAttribute("data-file", file);
 		downloadBtn.addEventListener("click", downloadImage);
+		const deleteBtn = item.querySelector("ion-button.delete");
+		if (getUser().username !== folder) {
+			deleteBtn.classList.add("hidden");
+		} else {
+			deleteBtn.classList.remove("hidden");
+			deleteBtn.setAttribute("data-folder", folder);
+			deleteBtn.setAttribute("data-file", file);
+			deleteBtn.addEventListener("click", removeFile);
+		}
 		// end of listeners
 		node.appendChild(item);
 	});

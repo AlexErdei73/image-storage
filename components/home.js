@@ -20,6 +20,13 @@ async function submit(event) {
 	} else {
 		submitBtn.removeAttribute("disabled");
 		console.log(json);
+		const index = appData.storage.indexOf(userLoggedIn.username);
+		if (index === -1) {
+			appData.storage.push(userLoggedIn.username);
+			appData[userLoggedIn.username] = [];
+		} 
+		appData[userLoggedIn.username].push(form.file.files[0].name);
+		initHome();
 	}
 }
 
@@ -84,47 +91,51 @@ async function removeFile(event) {
 		console.error(json.error);
 		showError(folders, json.error);
 	} else {
+		const index = appData[folder].indexOf(filename);
+		appData[folder].splice(index,1);
 		const folderNode = folders.querySelector(`li[data-folder="${folder}"]`);
 		const fileNode = folderNode.querySelector(`li[data-file="${filename}"]`);
 		fileNode.remove();
 	}
 }
 
+function insertFileNode(folder, file, node) {
+	const item = importTemp(11);
+	item.setAttribute("data-file", file);
+	const span = item.querySelector("span");
+	span.textContent = file;
+	// add event listeners to the buttons here
+	const button = item.querySelector("button");
+	button.setAttribute("data-folder", folder);
+	button.setAttribute("data-file", file);
+	button.addEventListener("mouseover", showPreview);
+	button.addEventListener("click", showImageInModal);
+	const closeDlgBtn = document.querySelector("dialog ion-button");
+	closeDlgBtn.addEventListener("click", () => {
+		const dialog = document.querySelector("dialog");
+		dialog.close();
+	});
+	const downloadBtn = item.querySelector("ion-button.download");
+	downloadBtn.setAttribute("data-folder", folder);
+	downloadBtn.setAttribute("data-file", file);
+	downloadBtn.addEventListener("click", downloadImage);
+	const deleteBtn = item.querySelector("ion-button.delete");
+	if (getUser().username !== folder) {
+		deleteBtn.classList.add("hidden");
+	} else {
+		deleteBtn.classList.remove("hidden");
+		deleteBtn.setAttribute("data-folder", folder);
+		deleteBtn.setAttribute("data-file", file);
+		deleteBtn.addEventListener("click", removeFile);
+	}
+	// end of listeners
+	node.appendChild(item);
+}
+
 function getFileListNode(folder) {
 	const fileList = appData[folder];
 	const node = importTemp(10);
-	fileList.forEach((file) => {
-		const item = importTemp(11);
-		item.setAttribute("data-file", file);
-		const span = item.querySelector("span");
-		span.textContent = file;
-		// add event listeners to the buttons here
-		const button = item.querySelector("button");
-		button.setAttribute("data-folder", folder);
-		button.setAttribute("data-file", file);
-		button.addEventListener("mouseover", showPreview);
-		button.addEventListener("click", showImageInModal);
-		const closeDlgBtn = document.querySelector("dialog ion-button");
-		closeDlgBtn.addEventListener("click", () => {
-			const dialog = document.querySelector("dialog");
-			dialog.close();
-		});
-		const downloadBtn = item.querySelector("ion-button.download");
-		downloadBtn.setAttribute("data-folder", folder);
-		downloadBtn.setAttribute("data-file", file);
-		downloadBtn.addEventListener("click", downloadImage);
-		const deleteBtn = item.querySelector("ion-button.delete");
-		if (getUser().username !== folder) {
-			deleteBtn.classList.add("hidden");
-		} else {
-			deleteBtn.classList.remove("hidden");
-			deleteBtn.setAttribute("data-folder", folder);
-			deleteBtn.setAttribute("data-file", file);
-			deleteBtn.addEventListener("click", removeFile);
-		}
-		// end of listeners
-		node.appendChild(item);
-	});
+	fileList.forEach((file) => insertFileNode(folder, file, node));
 	return node;
 }
 

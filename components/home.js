@@ -24,7 +24,7 @@ async function submit(event) {
 		if (index === -1) {
 			appData.storage.push(userLoggedIn.username);
 			appData[userLoggedIn.username] = [];
-		} 
+		}
 		appData[userLoggedIn.username].push(form.file.files[0].name);
 		initHome();
 	}
@@ -70,8 +70,8 @@ async function downloadImage(event) {
 		a.download = filename;
 		const clickHandler = () => {
 			setTimeout(() => {
-			  URL.revokeObjectURL(url);
-			  removeEventListener('click', clickHandler);
+				URL.revokeObjectURL(url);
+				removeEventListener("click", clickHandler);
 			}, 150);
 		};
 		a.addEventListener("click", clickHandler, false);
@@ -85,14 +85,14 @@ async function removeFile(event) {
 	const folder = button.getAttribute("data-folder");
 	const filename = button.getAttribute("data-file");
 	const json = await deleteFile(folder, filename, getUser().token);
-	const folders = document.querySelector("ul.folders")
+	const folders = document.querySelector("ul.folders");
 	removeError(folders);
 	if (json.error) {
 		console.error(json.error);
 		showError(folders, json.error);
 	} else {
 		const index = appData[folder].indexOf(filename);
-		appData[folder].splice(index,1);
+		appData[folder].splice(index, 1);
 		const folderNode = folders.querySelector(`li[data-folder="${folder}"]`);
 		const fileNode = folderNode.querySelector(`li[data-file="${filename}"]`);
 		fileNode.remove();
@@ -176,6 +176,17 @@ function getFoldersNode() {
 	return node;
 }
 
+function logout() {
+	localStorage.removeItem("user");
+	appData.user = {
+		username: "",
+		token: "",
+	};
+	appData.storage = [];
+	userLoggedIn = getUser();
+	initHome();
+}
+
 export function initHome() {
 	const homeNode = document.querySelector(".home article");
 	const oldFormNode = homeNode.childNodes[0];
@@ -183,19 +194,26 @@ export function initHome() {
 	const pNode = node.querySelector("p");
 	let text = WELCOME_TEXT_NO_USER;
 	userLoggedIn = getUser();
+	const logoutBtn = node.querySelector("button.logout");
+	logoutBtn.classList.add("hidden");
+	const homeArticle = document.querySelector(".home article");
 	if (userLoggedIn && userLoggedIn.token !== "") {
 		text = `Welcome ${userLoggedIn.username}!`;
-		const homeArticle = document.querySelector(".home article");
 		homeArticle.classList.remove("center");
+		logoutBtn.classList.remove("hidden");
+		logoutBtn.addEventListener("click", logout);
 	}
 	pNode.textContent = text;
 	node.addEventListener("submit", submit);
 	if (!oldFormNode) homeNode.appendChild(node);
 	else homeNode.replaceChild(node, oldFormNode);
+	const oldFoldersNode = homeNode.childNodes[1];
 	if (userLoggedIn && userLoggedIn.token !== "") {
-		const oldFoldersNode = homeNode.childNodes[1];
 		const folders = getFoldersNode();
 		if (!oldFoldersNode) homeNode.appendChild(folders);
 		else homeNode.replaceChild(folders, oldFoldersNode);
+	} else {
+		if (oldFoldersNode) oldFoldersNode.remove();
+		homeArticle.classList.add("center");
 	}
 }

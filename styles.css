@@ -263,6 +263,8 @@ li[data-file] span {
 
 .home article {
 	justify-content: start;
+	flex-wrap: wrap;
+	overflow-y: auto;
 }
 
 .home article.center {

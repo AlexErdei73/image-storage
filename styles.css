@@ -114,7 +114,7 @@ form {
 	align-items: start;
 	font-size: 120%;
 	padding: 1em;
-	padding-bottom: 3em;
+	padding-bottom: 1.5em;
 	border-radius: 0.325em;
 	border: 0.0325em solid yellowgreen;
 }
@@ -146,7 +146,7 @@ button {
 	border: 0.075em solid yellowgreen;
 	border-radius: 0.325em;
 	font-size: inherit;
-	padding: 0.5em;
+	padding: 0.3em;
 }
 
 button:hover {
@@ -182,14 +182,9 @@ input {
 	font-size: inherit;
 }
 
-#password {
-	font-size: 69.8%;
-	padding: 0.2em 0.1em;
-}
-
 #password-button {
 	position: absolute;
-	top: 0.2em;
+	top: 0.15em;
 	right: 0.2em;
 }
 
@@ -230,10 +225,15 @@ label[for="file"]:hover {
 	list-style: none;
 	display: flex;
 	flex-direction: column;
+	min-width: 15em;
 }
 
 .home p {
 	margin: 0;
+}
+
+.home form {
+	margin-left: 3em;
 }
 
 .folders li ion-button {
@@ -263,7 +263,7 @@ li[data-file] span {
 
 .home article {
 	justify-content: start;
-	flex-wrap: wrap;
+	flex-wrap: nowrap;
 	overflow-y: auto;
 }
 
@@ -300,7 +300,30 @@ dialog::backdrop {
 	background: rgba(0, 0, 0, 0.7);
 }
 
+@media (max-width: 50em) {
+	form {
+		font-size: 100%;
+		gap: 0.5em;
+	}
+
+	label[for="file"] div {
+		font-size: 100%;
+	}
+}
+
 @media (max-width: 35em) {
+	.home article {
+		flex-wrap: wrap;
+	}
+
+	ul.folders {
+		margin-left: 0;
+	}
+
+	.home form {
+		margin: auto;
+	}
+
 	nav .logo {
 		display: none;
 	}
@@ -312,5 +335,21 @@ dialog::backdrop {
 	nav li {
 		display: flex;
 		justify-content: center;
+	}
+
+	form {
+		font-size: 100%;
+		gap: 0.5em;
+	}
+
+	label[for="file"] div {
+		font-size: 100%;
+	}
+}
+
+@media (orientation: portrait) {
+	dialog img {
+		width: 90vw;
+		height: auto;
 	}
 }

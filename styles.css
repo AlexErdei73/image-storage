@@ -348,6 +348,29 @@ dialog::backdrop {
 	}
 }
 
+@media (max-width: 20em) {
+	body {
+		font-size: clamp(12px, 2vw, 2rem);
+	}
+
+	input {
+		font-size: inherit;
+	}
+
+	button {
+		font-size: inherit;
+	}
+
+	label[for="file"] div {
+		padding: 0.1em 0.7em;
+	}
+
+	#password-button {
+		top: 0.4em;
+		right: 0.4em;
+	}
+}
+
 @media (orientation: portrait) {
 	dialog img {
 		width: 90vw;

@@ -4,15 +4,17 @@
 }
 
 body {
-	background: rgb(32, 32, 32);
 	color: yellowgreen;
 	font-family: "Roboto", sans-serif;
 	margin: 0;
 }
 
 main {
-	margin: 5em 1em 0;
+	background: rgb(32, 32, 32);
+	margin: 4em 0 0;
 	max-width: 100rem;
+	padding: 1em 0;
+	min-height: calc(100vh - 6em);
 }
 
 .hide {
@@ -36,16 +38,17 @@ header {
 	left: 0;
 	top: 0;
 	width: 100%;
-	background: rgb(32, 32, 32);
 	z-index: 1;
 }
 
 nav {
+	background: rgb(32, 32, 32);
 	display: flex;
 	align-items: center;
 	gap: 1em;
 	border-bottom: 0.0325em solid yellowgreen;
 	height: 4em;
+	max-width: 100rem;
 }
 
 nav .logo {
@@ -166,6 +169,7 @@ input {
 	border: 0.075em solid yellowgreen;
 	border-radius: 0.325em;
 	width: 15em;
+	height: 1.4em;
 }
 
 .error {
@@ -198,8 +202,8 @@ label[for="file"] div {
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: 0.065em 0.135em;
-	font-size: 83.33%;
+	padding: 0.015em 0.25em;
+	font-size: 80%;
 	background-color: rgb(32, 32, 32);
 	color: inherit;
 	z-index: 1;
@@ -307,7 +311,8 @@ dialog::backdrop {
 	}
 
 	label[for="file"] div {
-		font-size: 100%;
+		font-size: 98%;
+		padding: 0 0.2em;
 	}
 }
 
@@ -341,15 +346,22 @@ dialog::backdrop {
 		font-size: 100%;
 		gap: 0.5em;
 	}
-
-	label[for="file"] div {
-		font-size: 100%;
-	}
 }
 
 @media (orientation: portrait) {
 	dialog img {
 		width: 90vw;
 		height: auto;
+	}
+}
+
+@media (min-width: 100rem) {
+	main {
+		margin-left: calc((100vw - 100rem) / 2);
+		margin-top: 4em;
+	}
+
+	nav {
+		margin-left: calc((100vw - 100rem) / 2);
 	}
 }

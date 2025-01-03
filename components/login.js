@@ -43,7 +43,7 @@ function addSubmitListener(node) {
 }
 
 export function initLogin() {
-	const loginNode = document.querySelector(".login article");
+	const loginNode = document.querySelector(".login");
 	const oldNode = loginNode.childNodes[0];
 	const node = importTemp(6);
 	addSubmitListener(node);

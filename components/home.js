@@ -188,7 +188,7 @@ function logout() {
 }
 
 export function initHome() {
-	const homeNode = document.querySelector(".home article");
+	const homeNode = document.querySelector(".home");
 	const oldFormNode = homeNode.childNodes[0];
 	const node = importTemp(7);
 	const pNode = node.querySelector("p");
@@ -196,10 +196,9 @@ export function initHome() {
 	userLoggedIn = getUser();
 	const logoutBtn = node.querySelector("button.logout");
 	logoutBtn.classList.add("hidden");
-	const homeArticle = document.querySelector(".home article");
 	if (userLoggedIn && userLoggedIn.token !== "") {
 		text = `Welcome ${userLoggedIn.username}!`;
-		homeArticle.classList.remove("center");
+		homeNode.classList.remove("center");
 		logoutBtn.classList.remove("hidden");
 		logoutBtn.addEventListener("click", logout);
 	}
@@ -214,6 +213,6 @@ export function initHome() {
 		else homeNode.replaceChild(folders, oldFoldersNode);
 	} else {
 		if (oldFoldersNode) oldFoldersNode.remove();
-		homeArticle.classList.add("center");
+		homeNode.classList.add("center");
 	}
 }

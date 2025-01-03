@@ -4,6 +4,7 @@
 }
 
 body {
+	background-color: black;
 	color: yellowgreen;
 	font-family: "Roboto", sans-serif;
 	margin: 0;
@@ -133,14 +134,15 @@ form {
 	min-width: 7em;
 }
 
-.register article,
-.login article,
-.home article {
+.register,
+.login,
+.home {
 	display: flex;
 	align-items: start;
 	justify-content: center;
-	max-height: calc(100vh - 5em);
-	overflow: hidden;
+	max-height: calc(100vh - 4em);
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 button {
@@ -202,7 +204,7 @@ label[for="file"] div {
 	position: absolute;
 	top: 0;
 	left: 0;
-	padding: 0.015em 0.25em;
+	padding: 0 0.55em;
 	font-size: 80%;
 	background-color: rgb(32, 32, 32);
 	color: inherit;
@@ -210,6 +212,8 @@ label[for="file"] div {
 	border: 0.075em solid yellowgreen;
 	border-color: inherit;
 	border-radius: 0.325em;
+	height: 1.25rem;
+	max-width: 3.5rem;
 }
 
 input#file {
@@ -219,6 +223,7 @@ input#file {
 	z-index: 0;
 	color: inherit;
 	border-color: inherit;
+	height: 1.25rem;
 }
 
 label[for="file"]:hover {
@@ -265,13 +270,13 @@ li[data-file] span {
 	margin-right: 0.5em;
 }
 
-.home article {
+.home {
 	justify-content: start;
 	flex-wrap: nowrap;
 	overflow-y: auto;
 }
 
-.home article.center {
+.home.center {
 	justify-content: center;
 }
 
@@ -312,12 +317,11 @@ dialog::backdrop {
 
 	label[for="file"] div {
 		font-size: 98%;
-		padding: 0 0.2em;
 	}
 }
 
 @media (max-width: 35em) {
-	.home article {
+	.home {
 		flex-wrap: wrap;
 	}
 
@@ -350,11 +354,11 @@ dialog::backdrop {
 
 @media (max-width: 20em) {
 	body {
-		font-size: clamp(12px, 2vw, 2rem);
+		font-size: clamp(12px, 4vw, 4rem);
 	}
 
 	input {
-		font-size: inherit;
+		font-size: clamp(12px, 4vw, 4rem);
 	}
 
 	button {
@@ -362,12 +366,18 @@ dialog::backdrop {
 	}
 
 	label[for="file"] div {
-		padding: 0.1em 0.7em;
+		font-size: clamp(12px, 4vw, 4rem);
+		height: 1.25em;
+		width: 4.2em;
 	}
 
 	#password-button {
 		top: 0.4em;
 		right: 0.4em;
+	}
+
+	input#file {
+		height: 1.25em;
 	}
 }
 

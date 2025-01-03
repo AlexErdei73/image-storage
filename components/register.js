@@ -58,7 +58,7 @@ export function addShowHidePasswordListener(node) {
 }
 
 export function initRegister() {
-	const registerNode = document.querySelector(".register article");
+	const registerNode = document.querySelector(".register");
 	const oldNode = registerNode.childNodes[0];
 	const node = importTemp(4);
 	addSubmitListener(node);

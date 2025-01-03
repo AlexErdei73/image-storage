@@ -309,6 +309,15 @@ dialog::backdrop {
 	background: rgba(0, 0, 0, 0.7);
 }
 
+.about article {
+	font-size: 120%;
+	margin: 3em 5em;
+}
+
+a {
+	color: cyan;
+}
+
 @media (max-width: 50em) {
 	form {
 		font-size: 100%;
@@ -317,6 +326,11 @@ dialog::backdrop {
 
 	label[for="file"] div {
 		font-size: 98%;
+	}
+
+	.about article {
+		font-size: 100%;
+		margin: 1em 3em;
 	}
 }
 

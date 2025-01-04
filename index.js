@@ -28,15 +28,22 @@ export async function fetchStorage() {
 		return;
 	}
 	storage.forEach((folder) => {
-		const folders = folder[0].split("/");
-		const folderName = folders[folders.length - 2];
+		let folderName;
+		if (!Array.isArray(folder)) {
+			const folders = folder.split("/");
+			folderName = folders[folders.length - 2];
+		} else {
+			const folders = folder[0].split("/");
+			folderName = folders[folders.length - 2];
+		}
 		appData.storage.push(folderName);
 		appData[folderName] = [];
-		folder.forEach((file) => {
-			const path = file.split("/");
-			const fileName = path[path.length - 1];
-			appData[folderName].push(fileName);
-		});
+		if (Array.isArray(folder))
+			folder.forEach((file) => {
+				const path = file.split("/");
+				const fileName = path[path.length - 1];
+				appData[folderName].push(fileName);
+			});
 	});
 }
 

@@ -25,7 +25,9 @@ async function submit(event) {
 			appData.storage.push(userLoggedIn.username);
 			appData[userLoggedIn.username] = [];
 		}
-		appData[userLoggedIn.username].push(form.file.files[0].name);
+		const newName = form.file.files[0].name.split(".");
+		newName[1] = "webp";
+		appData[userLoggedIn.username].push(newName.join("."));
 		initHome();
 	}
 }

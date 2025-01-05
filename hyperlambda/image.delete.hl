@@ -1,0 +1,42 @@
+
+// Delete the image if it's in your own folder, otherwise give access denied error. It takes the folder, filename and the token arguments.
+.arguments
+   folder:string
+   filename:string
+   token:string
+
+// Mandatory arguments are folder and filename
+validators.mandatory:x:@.arguments/*/folder
+validators.mandatory:x:@.arguments/*/filename
+
+log.info:x:@.arguments/*/folder
+
+// User shouyld have guest status
+auth.ticket.verify:guest
+
+// Get username
+auth.ticket.get
+
+log.info:x:@auth.ticket.get
+// If folder does not belong to user throw exception
+if
+   neq
+      .:x:@auth.ticket.get
+      .:x:@.arguments/*/folder
+   .lambda
+      throw:Access Denied
+         status:403
+         public:true
+         
+// Make path to file
+strings.concat
+   .:/etc/storage/
+   .:x:@.arguments/*/folder
+   .:/
+   .:x:@.arguments/*/filename
+
+// Delete the file
+io.file.delete:x:@strings.concat
+
+return
+   response:OK

@@ -1,0 +1,83 @@
+
+// Register the user to the storage app and send a verification email.
+.arguments
+   username:string
+   password:string
+   email:string
+   name: string
+
+// Verify mandatory arguments
+validators.mandatory:x:@.arguments/*/username
+validators.mandatory:x:@.arguments/*/password
+validators.mandatory:x:@.arguments/*/email
+
+// Verify email
+validators.email:x:@.arguments/*/email
+
+// Verify password length
+validators.string:x:@.arguments/*/password
+   min: 12
+
+// Hash the password
+crypto.password.hash:x:@.arguments/*/password
+
+// Throw error if username already exists
+data.connect:image-storage
+   data.read
+      table:users
+      where
+         and
+            username.eq:x:@.arguments/*/username
+   if
+      not-null:x:@data.read/**
+      .lambda
+         throw:Username already exists!
+            status:403
+            public:true
+            
+// Save user in the database
+   data.create
+      table:users
+      values
+         username:x:@.arguments/*/username
+         email:x:@.arguments/*/email
+         name:x:@.arguments/*/name
+         password_hash:x:@crypto.password.hash
+
+// Make token for verification link
+config.get:"auth:secret"
+strings.concat
+   .username:x:@.arguments/*/username
+   .secret:x:@config.get
+crypto.hash.sha256:x:@strings.concat
+         
+// Create the link for the verifycation email
+strings.concat
+   .base-url:"https://alexerdei-team.us.ainiro.io/magic/modules/image-storage/verify"
+   .:"?username="
+   .username:x:@.arguments/*/username
+   .:"&token="
+   .token:x:@crypto.hash.sha256
+.url:x:-
+
+// Add the link to the text
+strings.concat
+   .:@"Please click on the link below to verify your email!
+                                           
+"
+   .url:x:@.url
+               
+// Send verification email
+unwrap:x:./*/mail.smtp.send/**
+mail.smtp.send
+   message
+      to
+         .
+            name:x:@.arguments/*/username
+            email:x:@.arguments/*/email
+      subject:Please verify your email!
+      entity:text/plain
+         content:x:@strings.concat
+
+return
+   message:OK

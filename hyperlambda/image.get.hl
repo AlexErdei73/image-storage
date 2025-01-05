@@ -1,0 +1,47 @@
+
+// Download or preview an image file. Input parameters are the folder and filename and it returns the media stream.
+.arguments
+   folder:string
+   filename:string
+   
+// Validate mandatory arguments
+validators.mandatory:x:@.arguments/*/folder
+validators.mandatory:x:@.arguments/*/filename
+
+// Get the extention
+strings.split:x:@.arguments/*/filename
+   .:"."
+
+get-value:x:@strings.split/**/1
+
+// In case of jpg the subtype is jpeg
+if
+   eq
+      .:x:@get-value
+      .:jpg
+   .lambda
+      set-value:x:@get-value
+         .:jpeg
+
+// get mime-type
+strings.concat
+   .:image
+   .:"/"
+   get-value:x:@get-value
+
+.mime-type
+set-value:x:@.mime-type
+   get-value:x:@strings.concat
+
+// get file path
+strings.concat
+   .:/etc/storage/
+   get-value:x:@.arguments/*/folder
+   .:/
+   get-value:x:@.arguments/*/filename
+
+// Return the image file
+response.headers.set
+   Content-Type:x:@.mime-type
+io.stream.open-file:x:@strings.concat
+return:x:-

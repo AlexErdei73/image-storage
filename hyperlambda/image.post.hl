@@ -1,0 +1,67 @@
+//Upload an image file to the folder of the user
+.accept:multipart/form-data
+.arguments
+   file:*
+   token:string
+ 
+//Verify user is authenticated
+auth.ticket.verify:guest
+
+//Get username
+auth.ticket.get
+
+//Make folder path
+strings.concat
+   .:/etc/storage/
+   get-value:x:@auth.ticket.get
+   .:/
+.folder:x:@strings.concat
+
+//Check if folder exists
+if
+   not
+      io.folder.exists:x:@.folder
+   //If not create folder
+   .lambda
+      io.folder.create:x:@.folder
+//Make file path
+strings.concat
+   .:x:@.folder
+   get-value:x:@.arguments/*/file/*/name
+
+//Save file
+io.stream.save-file:x:@strings.concat
+   get-value:x:@.arguments/*/file/*/stream
+ 
+   
+//Try to convert the image
+try
+   image.resize:x:@strings.concat
+      width:800
+      type:webp
+
+   strings.split:x:@.arguments/*/file/*/name
+      .:.
+
+   strings.concat
+      .:x:@.folder
+      .:x:@strings.split/**/0
+      .:.webp
+
+   io.stream.save-file:x:@strings.concat
+      get-value:x:@image.resize
+
+
+//Catch the error
+.catch
+   throw:Not supported image!
+      status:500
+      public:true
+
+//Delete original file
+.finally
+   io.file.delete:x:@strings.concat
+   
+//Return OK
+return
+   response:OK

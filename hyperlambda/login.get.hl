@@ -1,0 +1,60 @@
+
+// Login the user and if the credentials are correct return the valid JWT token. Mandatory input parameters are the username and password. If the user is registered and the email is verified access is granted. If the credentials are unknown or email has not been verified access is denied.
+.arguments
+   username:string
+   password:string
+
+// Validate mandatory arguments
+validators.mandatory:x:@.arguments/*/username
+validators.mandatory:x:@.arguments/*/password
+
+// The password is minimum 12 characters
+validators.string:x:@.arguments/*/password
+   min:12
+
+// Get user record from the database
+data.connect:image-storage
+   data.read
+      table:users
+      columns
+         name
+         email
+         email_verified
+         password_hash
+      where
+         and
+            username.eq:x:@.arguments/*/username
+   // Throw exception if user does not exist
+   if
+      null:x:@data.read/*/*
+      .lambda
+         throw:Invalid credentials, access denied
+            status:403
+            public:true
+   // Throw exception if password is invalid
+   crypto.password.verify:x:@.arguments/*/password
+      hash:x:@data.read/*/*/password_hash
+   if
+      not
+         .:x:@crypto.password.verify
+      .lambda
+         throw:Invalid credentials, access denied
+            status:403
+            public:true
+   // Throw exception if email is not verified
+   if
+      eq
+         get-value:x:@data.read/*/*/email_verified
+         .:long:0
+      .lambda
+         throw:Verify your email, access denied
+            status:403
+            public:true
+   // Create JWT and return to the browser
+   auth.ticket.create
+      username:x:@.arguments/*/username
+      roles
+         .:guest
+   unwrap:x:+/*
+   return
+      token:x:@auth.ticket.create

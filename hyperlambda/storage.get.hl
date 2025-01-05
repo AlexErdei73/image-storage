@@ -1,0 +1,15 @@
+
+// Get the folder list of the storage
+.arguments
+   token:string
+
+auth.ticket.verify:guest
+
+io.folder.list:/etc/storage/
+
+for-each:x:@io.folder.list/*
+   add:x:@.dp/#
+      .
+      io.file.list:x:@.dp/#
+
+return:x:@io.folder.list/*

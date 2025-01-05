@@ -1,0 +1,40 @@
+// Verify the email address of the user
+.arguments
+   username:string
+   token:string
+
+// Make token for verification link
+config.get:"auth:secret"
+strings.concat
+   .username:x:@.arguments/*/username
+   .secret:x:@config.get
+crypto.hash.sha256:x:@strings.concat 
+
+// Check token
+if
+   neq
+      .lhs:x:@.arguments/*/token
+      .rhs:x:@crypto.hash.sha256
+   .lambda
+      throw:Bogus token, go home!
+         status:403
+         public:true
+         field:token
+
+// Update email_verified in database
+data.connect:image-storage
+   data.update
+      table:users
+      values
+         email_verified:1
+      where
+         and
+            username.eq:x:@.arguments/*/username
+ 
+
+// Redirects the client to the specified [url].
+execute:magic.workflows.actions.execute
+   name:http-redirect
+   filename:/misc/workflows/actions/http/http-redirect.hl
+   arguments
+      url:"https://alexerdei73.github.io/image-storage/#login"

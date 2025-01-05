@@ -194,40 +194,14 @@ input {
 	right: 0.2em;
 }
 
-label[for="file"] {
-	position: relative;
+#browse-file {
+	font-size: 83.33%;
 	width: 15em;
-	height: 1.3em;
-}
-
-label[for="file"] div {
-	position: absolute;
-	top: 0;
-	left: 0;
-	padding: 0 0.55em;
-	font-size: 80%;
-	background-color: rgb(32, 32, 32);
-	color: inherit;
-	z-index: 1;
-	border: 0.075em solid yellowgreen;
-	border-color: inherit;
-	border-radius: 0.325em;
-	height: 1.25rem;
-	max-width: 3.5rem;
-}
-
-input#file {
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: 0;
-	color: inherit;
-	border-color: inherit;
-	height: 1.25rem;
-}
-
-label[for="file"]:hover {
-	color: cyan;
+	padding: 0.1em;
+	text-align: left;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .home ul {

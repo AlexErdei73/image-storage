@@ -204,6 +204,17 @@ export function initHome() {
 		logoutBtn.classList.remove("hidden");
 		logoutBtn.addEventListener("click", logout);
 	}
+	const fileInput = node.querySelector('input[type="file"]');
+	fileInput.addEventListener("change", (event) => {
+		const fileName = event.target.files[0].name;
+		if (fileName) {
+			document.querySelector("#browse-file").textContent = fileName;
+		}
+	})
+	const browseFileBtn = node.querySelector("#browse-file");
+	browseFileBtn.addEventListener("click", () => {
+		document.querySelector('input[type="file"]').click();
+	});
 	pNode.textContent = text;
 	node.addEventListener("submit", submit);
 	if (!oldFormNode) homeNode.appendChild(node);

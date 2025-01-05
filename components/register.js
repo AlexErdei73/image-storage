@@ -15,8 +15,8 @@ export function showError(node, error) {
 function addSubmitListener(node) {
 	const listener = async function (event) {
 		event.preventDefault();
-		const username = node.querySelector("#username").value;
-		const password = node.querySelector("#password").value;
+		const username = node.querySelector(".username").value;
+		const password = node.querySelector("input.password").value;
 		const email = node.querySelector("#email").value;
 		const name = node.querySelector("#name").value;
 		const user = {
@@ -39,11 +39,11 @@ function addSubmitListener(node) {
 }
 
 export function addShowHidePasswordListener(node) {
-	const pswBtn = node.querySelector("#password-button");
+	const pswBtn = node.querySelector(".password-button");
 
 	const listener = function () {
-		const pswInput = node.querySelector("#password");
-		const pswIcon = node.querySelector("#password-button ion-icon");
+		const pswInput = node.querySelector("input.password");
+		const pswIcon = node.querySelector(".password-button ion-icon");
 		let typeAttr = pswInput.getAttribute("type");
 		if (typeAttr === "password") {
 			pswInput.setAttribute("type", "text");

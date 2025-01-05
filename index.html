@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width, initial-scale=1.0" />
+		<meta name="viewport" content="initial-scale=1.0" />
 		<meta name="description" content="Image storage app, which works with AINIRO Magic backend"/>
 		<link rel="stylesheet" href="styles.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -120,16 +120,16 @@
 		<form action="">
 			<h1>Register</h1>
 			<div class="form-group">
-				<label for="username">Username*</label>
-				<input type="text" id="username" required />
+				<label for="usrname">Username*</label>
+				<input type="text" class="username" id="usrname" required />
 			</div>
 			<div class="form-group">
-				<label for="password">Password*</label>
+				<label for="psw">Password*</label>
 				<div id="password-container">
-					<input type="password" id="password" minlength="12" required />
+					<input type="password" class="password" id="psw" minlength="12" required />
 					<ion-button
 						type="button"
-						id="password-button"
+						class="password-button"
 						aria-label="show password"
 					>
 						<ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
@@ -159,15 +159,15 @@
 			<h1>Login</h1>
 			<div class="form-group">
 				<label for="username">Username*</label>
-				<input type="text" id="username" required />
+				<input type="text" class="username" id="username" required />
 			</div>
 			<div class="form-group">
 				<label for="password">Password*</label>
 				<div id="password-container">
-					<input type="password" id="password" minlength="12" required />
+					<input type="password" class="password" id="password" minlength="12" required />
 					<ion-button
 						type="button"
-						id="password-button"
+						class="password-button"
 						aria-label="show password"
 					>
 						<ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
@@ -207,8 +207,8 @@
 	<!-- Home Folder List Item 9 -->
 	<template>
 		<li data-folder="">
-			<ion-button type="button" data-folder="" data-open="false">
-				<ion-icon name="folder-outline"></ion-icon>
+			<ion-button type="button" data-folder="" data-open="false" aria-label="folder">
+				<ion-icon name="folder-outline" aria-hidden="true"></ion-icon>
 				<span></span>
 			</ion-button>
 		</li>
@@ -225,11 +225,11 @@
 			<button type="button" data-file="" data-folder="">
 				<span></span>
 			</button>
-			<ion-button class="download" data-file="" data-folder="">
-				<ion-icon name="download-outline"></ion-icon>
+			<ion-button class="download" data-file="" data-folder="" aria-label="download">
+				<ion-icon name="download-outline" aria-hidden="true"></ion-icon>
 			</ion-button>
-			<ion-button class="delete" data-file="" data-folder="">
-				<ion-icon name="trash-outline"></ion-icon>
+			<ion-button class="delete" data-file="" data-folder="" aria-label="delete">
+				<ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
 			</ion-button>
 		</li>
 	</template>

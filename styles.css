@@ -188,7 +188,7 @@ input {
 	font-size: inherit;
 }
 
-#password-button {
+.password-button {
 	position: absolute;
 	top: 0.15em;
 	right: 0.2em;
@@ -266,6 +266,7 @@ figure img {
 dialog {
 	color: yellowgreen;
 	background-color: rgb(48, 48, 48);
+	overflow: hidden;
 }
 
 dialog ion-button {

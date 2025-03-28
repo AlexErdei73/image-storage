@@ -3,7 +3,10 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="initial-scale=1.0" />
-		<meta name="description" content="Image storage app, which works with AINIRO Magic backend"/>
+		<meta
+			name="description"
+			content="Image storage app, which works with AINIRO Magic backend"
+		/>
 		<link rel="stylesheet" href="styles.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -55,11 +58,7 @@
 		<!-- Ionic Icons -->
 		<script
 			type="module"
-			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-		></script>
-		<script
-			nomodule
-			src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+			src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"
 		></script>
 	</body>
 
@@ -126,7 +125,13 @@
 			<div class="form-group">
 				<label for="psw">Password*</label>
 				<div id="password-container">
-					<input type="password" class="password" id="psw" minlength="12" required />
+					<input
+						type="password"
+						class="password"
+						id="psw"
+						minlength="12"
+						required
+					/>
 					<ion-button
 						type="button"
 						class="password-button"
@@ -164,7 +169,13 @@
 			<div class="form-group">
 				<label for="password">Password*</label>
 				<div id="password-container">
-					<input type="password" class="password" id="password" minlength="12" required />
+					<input
+						type="password"
+						class="password"
+						id="password"
+						minlength="12"
+						required
+					/>
 					<ion-button
 						type="button"
 						class="password-button"
@@ -207,7 +218,12 @@
 	<!-- Home Folder List Item 9 -->
 	<template>
 		<li data-folder="">
-			<ion-button type="button" data-folder="" data-open="false" aria-label="folder">
+			<ion-button
+				type="button"
+				data-folder=""
+				data-open="false"
+				aria-label="folder"
+			>
 				<ion-icon name="folder-outline" aria-hidden="true"></ion-icon>
 				<span></span>
 			</ion-button>
@@ -225,10 +241,20 @@
 			<button type="button" data-file="" data-folder="">
 				<span></span>
 			</button>
-			<ion-button class="download" data-file="" data-folder="" aria-label="download">
+			<ion-button
+				class="download"
+				data-file=""
+				data-folder=""
+				aria-label="download"
+			>
 				<ion-icon name="download-outline" aria-hidden="true"></ion-icon>
 			</ion-button>
-			<ion-button class="delete" data-file="" data-folder="" aria-label="delete">
+			<ion-button
+				class="delete"
+				data-file=""
+				data-folder=""
+				aria-label="delete"
+			>
 				<ion-icon name="trash-outline" aria-hidden="true"></ion-icon>
 			</ion-button>
 		</li>
